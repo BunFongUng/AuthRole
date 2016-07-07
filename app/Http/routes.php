@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
+Route::get("error", ["as" => "403", function() {
+    return view("errors.403");
+}]);
 Route::group(["middleware" => "auth"], function() {
     Route::get('/home', 'HomeController@index');
 
@@ -37,7 +39,14 @@ Route::group(["middleware" => "auth"], function() {
     Route::patch("/home/permissions/{id}", ["as" => "permissions.update", "uses" => "PermissionsController@update", "middleware" => ["permission:permission-edit"]]);
     Route::delete("/home/permissions/{id}", ["as" => "permissions.destroy", "uses" => "PermissionsController@destroy", "middleware" => ["permission:permission-delete"]]);
 
-    Route::get("/home/posts", ["as" => "posts.index", "uses" => "PostsController@index", "middleware" => ["permission:post-list"]]);
+    //module for user role access only
+    Route::get("/home/posts", ["as" => "posts.index", "uses" => "PostsController@index", "middleware" => ["permission:post-list|post-create|post-edit|post-delete"]]);
+    Route::get("/home/posts/create", ["as" => "posts.create", "uses" => "PostsController@create", "middleware" => ["permission:post-create"]]);
+    Route::post("/home/posts/create", ["as" => "posts.store", "uses" => "PostsController@store", "middleware" => "permission:post-create"]);
+    Route::get("/home/posts/{id}", ["as" => "posts.show", "uses" => "PostsController@show", "middleware" => ["permission:post-list|post-create|post-edit|post-delete"]]);
+    Route::get("/home/posts/{id}/edit", ["as" => "posts.edit", "uses" => "PostsController@edit", "middleware" => ["permission:post-edit"]]);
+    Route::patch("/home/posts/{id}", ["as" => "posts.update", "uses" => "PostsController@update", "middleware" => ["permission:post-edit"]]);
+    Route::delete("/home/posts/{id}", ["as" => "posts.destroy", "uses" => "PostsController@destroy", "middleware" => ["permission:post-delete"]]);
 });
 
 
