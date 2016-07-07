@@ -15,7 +15,7 @@ class PermissionTableSeeder extends Seeder
         $permissions = [
 //            [
 //
-//                'name' => 'role-list',
+//                'name' => 'roles-list',
 //
 //                'display_name' => 'Display Role Listing',
 //
@@ -25,7 +25,7 @@ class PermissionTableSeeder extends Seeder
 //
 //            [
 //
-//                'name' => 'role-create',
+//                'name' => 'roles-create',
 //
 //                'display_name' => 'Create Role',
 //
@@ -35,7 +35,7 @@ class PermissionTableSeeder extends Seeder
 //
 //            [
 //
-//                'name' => 'role-edit',
+//                'name' => 'roles-edit',
 //
 //                'display_name' => 'Edit Role',
 //
@@ -45,7 +45,7 @@ class PermissionTableSeeder extends Seeder
 //
 //            [
 //
-//                'name' => 'role-delete',
+//                'name' => 'roles-delete',
 //
 //                'display_name' => 'Delete Role',
 //
@@ -124,68 +124,68 @@ class PermissionTableSeeder extends Seeder
 //            ],
 //
 //            [
-//                "name" => "permission-create",
+//                "name" => "permissions-create",
 //                "display_name" => "Create new Permission",
 //                "description" => "Create Permission"
 //            ],
 //
 //            [
-//                "name" => "permission-edit",
+//                "name" => "permissions-edit",
 //                "display_name" => "Edit Permission",
 //                "description" => "Edit Permission"
 //            ],
 //
 //            [
-//                "name" => "permission-delete",
-//                "display_name" => "Delete permission",
-//                "description" => "Delete permission"
+//                "name" => "permissions-delete",
+//                "display_name" => "Delete permissions",
+//                "description" => "Delete permissions"
 //            ]
-            [
-                "name" => "user-list",
-                "display_name" => "Listing Users",
-                "description" => "Listing Users"
-            ],
+//            [
+//                "name" => "user-list",
+//                "display_name" => "Listing Users",
+//                "description" => "Listing Users"
+//            ],
+//
+//            [
+//                "name" => "user-create",
+//                "display_name" => "Create new user",
+//                "description" => "Create user"
+//            ],
+//
+//            [
+//                "name" => "user-edit",
+//                "display_name" => "Edit user",
+//                "description" => "Edit user"
+//            ],
+//
+//            [
+//                "name" => "user-delete",
+//                "display_name" => "Delete user",
+//                "description" => "Delete user"
+//            ],
 
             [
-                "name" => "user-create",
-                "display_name" => "Create new user",
-                "description" => "Create user"
-            ],
-
-            [
-                "name" => "user-edit",
-                "display_name" => "Edit user",
-                "description" => "Edit user"
-            ],
-
-            [
-                "name" => "user-delete",
-                "display_name" => "Delete user",
-                "description" => "Delete user"
-            ],
-
-            [
-                "name" => "role-list",
+                "name" => "roles-list",
                 "display_name" => "Listing roles",
                 "description" => "Listing roles"
             ],
 
             [
-                "name" => "role-create",
-                "display_name" => "Create new role",
-                "description" => "Create role"
+                "name" => "roles-create",
+                "display_name" => "Create new roles",
+                "description" => "Create roles"
             ],
 
             [
-                "name" => "role-edit",
-                "display_name" => "Edit role",
-                "description" => "Edit role"
+                "name" => "roles-edit",
+                "display_name" => "Edit roles",
+                "description" => "Edit roles"
             ],
 
             [
-                "name" => "role-delete",
-                "display_name" => "Delete role",
-                "description" => "Delete role"
+                "name" => "roles-delete",
+                "display_name" => "Delete roles",
+                "description" => "Delete roles"
             ]
         ];
 
@@ -193,6 +193,5 @@ class PermissionTableSeeder extends Seeder
             \App\Permission::create($value);
         }
 
-//        $adminRole->attachPermissions($permissions);
     }
 }

@@ -2,7 +2,7 @@
 
 /**
  * This file is part of Entrust,
- * a role & permission management solution for Laravel.
+ * a roles & permissions management solution for Laravel.
  *
  * @license MIT
  * @package Zizaco\Entrust
@@ -16,10 +16,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the Role model used by Entrust to create correct relations.  Update
-    | the role if it is in a different namespace.
+    | the roles if it is in a different namespace.
     |
     */
-    'role' => 'App\Role',
+    'roles' => 'App\Role',
 
     /*
     |--------------------------------------------------------------------------
@@ -37,10 +37,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the Permission model used by Entrust to create correct relations.
-    | Update the permission if it is in a different namespace.
+    | Update the permissions if it is in a different namespace.
     |
     */
-    'permission' => 'App\Permission',
+    'permissions' => 'App\Permission',
 
     /*
     |--------------------------------------------------------------------------
