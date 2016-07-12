@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class RolesController extends Controller
 {
@@ -15,7 +18,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view("roles.index")->with("roles", $roles);
     }
 
     /**
@@ -25,7 +29,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view("roles.form_create");
     }
 
     /**
@@ -36,7 +40,20 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            "name" => "required|min:3",
+            "display_name" => "required|min:3",
+            "description" => "required"
+        );
+
+        $validation = Validator::make($request->all(), $rules);
+        if($validation->fails()) {
+            return redirect()->route("roles.create")->withInput()->withErrors($validation);
+        }
+
+        Role::create($request->all());
+        return redirect()->route("roles.index");
+
     }
 
     /**
@@ -47,7 +64,8 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        //
+//        $role = Role::findOrfail($id);
+//        return view("roles.show", ["role" => $role]);
     }
 
     /**
@@ -58,7 +76,8 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrfail($id);
+        return view("roles.edit", ["role" => $role]);
     }
 
     /**
@@ -70,7 +89,21 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            "name" => "required|min:3",
+            "display_name" => "required|min:3",
+            "description" => "required"
+        ];
+
+        $validation = Validator::make($request->all(), $rules);
+
+        if($validation->fails()) {
+            return redirect()->route("roles.edit", ["id" => $id])->withInput()->withErrors($validation);
+        }
+
+        $role = Role::findOrfail($id);
+        $role->update($request->all());
+        return redirect()->route("roles.index");
     }
 
     /**
@@ -81,6 +114,8 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findOrfail($id);
+        $role->delete();
+        return redirect()->route("roles.index");
     }
 }

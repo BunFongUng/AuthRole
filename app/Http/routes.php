@@ -16,9 +16,11 @@ Route::get('/', function () {
 });
 
 Route::auth();
+
 Route::get("error", ["as" => "403", function() {
     return view("errors.403");
 }]);
+
 Route::group(["middleware" => "auth"], function() {
     Route::get('/home', 'HomeController@index');
 
@@ -31,13 +33,13 @@ Route::group(["middleware" => "auth"], function() {
     Route::patch("/home/users/{id}", ["as" => "users.update", "uses" => "UserManagementController@update", "middleware" => ["permissions:user-edit"]]);
     Route::delete("/home/users/{id}", ["as" => "users.destroy", "uses" => "UserManagementController@destroy", "middleware" => ["permissions:user-delete"]]);
 
-    Route::get("/home/roles", ["as" => "roles.index", "uses" => "RolesController@index", "middleware" => ["permissions:roles-list|roles-create|roles-edit|roles-delete"]]);
-    Route::get("/home/roles/create", ["as" => "roles.create", "uses" => "RolesController@create", "middleware" => ["permissions:roles-create"]]);
-    Route::post("/home/roles/create", ["as" => "roles.store", "uses" => "RolesController@store", "middleware" => ["permissions:roles-create"]]);
-    Route::get("/home/roles/{id}", ["as" => "roles.show", "uses" => "RolesController@show", "middleware" => ["permissions:roles-list|roles-create|roles-edit|roles-delete"]]);
-    Route::get("/home/roles/{id}/edit", ["as" => "roles.edit", "uses" => "RolesController@edit", "middleware" => ["permissions:roles-edit"]]);
-    Route::patch("/home/roles/{id}", ["as" => "roles.update", "uses" => "RolesController@update", "middleware" => ["permissions:roles-edit"]]);
-    Route::delete("/home/roles/{id}", ["as" => "roles.destroy", "uses" => "RolesController@destroy", "middleware" => ["permissions:roles-delete"]]);
+    Route::get("/home/roles", ["as" => "roles.index", "uses" => "RolesController@index", "middleware" => ["permissions:role-list|role-create|role-edit|role-delete"]]);
+    Route::get("/home/roles/create", ["as" => "roles.create", "uses" => "RolesController@create", "middleware" => ["permissions:role-create"]]);
+    Route::post("/home/roles/create", ["as" => "roles.store", "uses" => "RolesController@store", "middleware" => ["permissions:role-create"]]);
+    Route::get("/home/roles/{id}", ["as" => "roles.show", "uses" => "RolesController@show", "middleware" => ["permissions:role-list|role-create|role-edit|role-delete"]]);
+    Route::get("/home/roles/{id}/edit", ["as" => "roles.edit", "uses" => "RolesController@edit", "middleware" => ["permissions:role-edit"]]);
+    Route::patch("/home/roles/{id}", ["as" => "roles.update", "uses" => "RolesController@update", "middleware" => ["permissions:role-edit"]]);
+    Route::delete("/home/roles/{id}", ["as" => "roles.destroy", "uses" => "RolesController@destroy", "middleware" => ["permissions:role-delete"]]);
 
     Route::get("/home/permissions", ["as" => "permissions.index", "uses" => "PermissionsController@index", "middleware" => ["permissions:permissions-list|permissions-create|permissions-edit|permissions-delete"]]);
     Route::get("/home/permissions/create", ["as" => "permissions.create", "uses" => "PermissionsController@create", "middleware" => ["permissions:permissions-create"]]);

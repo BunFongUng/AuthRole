@@ -48,15 +48,11 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    @role("admin")
-                    <li><a href="{{route("users.index")}}">Users</a></li>
-                    <li><a href="{{route("roles.index")}}">Roles</a></li>
-                    <li><a href="{{route("permissions.index")}}">Permissions</a></li>
-                    @endrole()
-
-                    @role("user")
-                    <li><a href="{{route("posts.index")}}">Posts</a></li>
-                    @endrole()
+                    @if(Entrust::hasRole('admin'))
+                        <li><a href="{{route("users.index")}}">Users</a></li>
+                        <li><a href="{{route("roles.index")}}">Roles</a></li>
+                        <li><a href="{{route("permissions.index")}}">Permissions</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -81,7 +77,9 @@
         </div>
     </nav>
 
-    @yield('content')
+   <div class="container">
+       @yield('content')
+   </div>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
