@@ -53,6 +53,10 @@
                         <li><a href="{{route("roles.index")}}">Roles</a></li>
                         <li><a href="{{route("permissions.index")}}">Permissions</a></li>
                     @endif
+
+                    @if(Entrust::hasRole("user"))
+                        <li><a href="{{route("roles.index")}}">Roles</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

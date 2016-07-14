@@ -32,6 +32,10 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <a href="{{route("roles.assign", ["id" => $role->id])}}" class="btn btn-warning form-control"><i class="fa fa-plus-square" aria-hidden="true"></i> Assign Permissions</a>
+                                </div>
+
+                                <div class="form-group">
                                     {{Form::open(array("url" => "/home/roles/". $role->id))}}
                                     {{ Form::hidden('_method', 'DELETE') }}
                                     <button type="submit" class="btn btn-danger form-control"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
@@ -43,7 +47,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <a href="{{route("roles.create")}}" class="btn btn-primary">Create New</a>
+                <a href="{{route("roles.create")}}" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i> Create New</a>
            @else
                <div class="alert alert-danger">
                    <h3>Result Not Found!</h3>

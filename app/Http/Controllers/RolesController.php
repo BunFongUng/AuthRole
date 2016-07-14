@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -64,8 +65,8 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-//        $role = Role::findOrfail($id);
-//        return view("roles.show", ["role" => $role]);
+        $role = Role::findOrfail($id);
+        return view("roles.show", ["role" => $role]);
     }
 
     /**
@@ -78,6 +79,26 @@ class RolesController extends Controller
     {
         $role = Role::findOrfail($id);
         return view("roles.edit", ["role" => $role]);
+    }
+
+    /**
+     * assign permissions to the specified role
+     *
+     */
+    public function assignPermissions($id) {
+        $role = Role::findOrfail($id);
+        $permissions = Permission::all();
+        return view("roles.assign_permissions", ["role" => $role, "permissions" => $permissions]);
+    }
+
+    /*
+     *  attach permissions to the specified role
+     * */
+    public function attachPermissions(Request $request, $id) {
+        $role = Role::findOrfail($id);
+        $permissions = $request->input("permissions");
+        $role->attachPermissions($permissions);
+        return redirect()->route("roles.index");
     }
 
     /**
